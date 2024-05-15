@@ -1,0 +1,32 @@
+\rail@p{-ht}
+\rail@i{1}{ \par
+line : directiveLine | programLine ; directiveLine : operator ( ';' operator + ) ? 'VK' ; programLine : programLineNumber operator ( ';' operator + ) ? ; \par
+program : programLine ( programLine + ) ? ; \par
+programLineNumber : numberGroup '.' numberLine ; \par
+operator : emptyOperator | assignmentOperator | inputOutputOperator | controlOperator | debuggingOperator ; \par
+letter : A | B | C | '...' | X | Y | Z ; \par
+digit : '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' ; \par
+identifier : letter ( (letter | digit) + | () ) ; \par
+identifierStandardFunction : FABS | FCHR | FCOS | FITR | FEXP | FLOG | FRAN | FSBR | FSGN | FSQT | FSIN | FX ; \par
+variable : simpleVariable | indexedVariable ; \par
+simpleVariable : identifier; \par
+indexedVariable : arrayIdentifier | ( indexExpression ( ',' indexExpression ) ? ) ; \par
+arrayIdentifier : identifier ; \par
+indexExpression : unsignedInteger | variable | arithmeticExpression ; \par
+arithmeticExpression : primaryExpression | ( ( '+' | '-' ) ? primaryExpression) | (arithmeticExpression arithmeticOperation primaryExpression) ; \par
+primaryExpression : unsignedReal | variable | standardFunction | ( leftParenthesis arithmeticExpression rightParenthesis ) ; \par
+arithmeticOperation : '+' | '-' | '*' | '/' | '^' ; \par
+standardFunction : identifierStandardFunction leftParenthesis (arithmeticExpression) ? rightParenthesis ; \par
+leftParenthesis : '(' | '[' | '<' ; \par
+rightParenthesis : ')' | ']' | '>'; \par
+\par
+rules : ( rule ? + ';' ) ; rule : ( identifier ':' ) ? body[1--5] ; \par
+}
+r : ('ASK' | 'A') listIOElements ; listIOElements : IOElement ( ',' IOElement + ) ? ; IOElement : variable | '"' text '"' | '!' | percent | '¤' ; \par
+limiter : 'VK' | space | ',' | ';' | dog ; \par
+otputOperator : ('TYPE' | 'T') listIOElements ; writeOperator : ('WRITE' | 'W') ( numberLineInGroup | numberGroup | ('ALL' | 'A') ) ? ; jumpOperator : ('GOTO' | 'G') ( numberLineInGroup ) ? ; conditionalOperator : ('IF' | 'I') '(' cond ')' lineNum (',' lineNum (',' lineNum) ? ) ? ; cond : expression ; \par
+repetitionOperator : ('FOR' | 'F') variable '=' start ((',' step) ? limit ) ? ';' bodyLoop ; start : expression ; step : expression ; limit : expression ; bodyLoop : (operator + ) ? ; \par
+stopOperator : ('QUIT' | 'Q') ; \par
+subroutineCallOperator : ('DO' | 'D') (numberLineInGroup | numberGroup | ('ALL' | 'A')) ? ; subroutineEndOperator : ('RETURN' | 'R') ; \par
+commentOperator : ('COMMENT' | 'C') anySequenceCharacters ; eraseOperator : ('ERASE' | 'E') (numberLineInGroup | numberGroup | ('ALL' | 'A') | ('TEXT' | 'T') ) ? ; modifyOperator : ('MODIFY' | 'M') numberLineInGroup ; xecuteOperator : ('XECUTE' | 'X') callingFunctionProcedure ; callingFunctionProcedure : functionName (listParametrs) ? ; \par
+}
