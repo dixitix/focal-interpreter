@@ -1,0 +1,110 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}    
+\usepackage[russian]{babel}  
+\usepackage{rail}
+\usepackage{fancyhdr}       
+
+\railoptions{-ht}
+
+\newcommand{\largeheader}[1]{\Large #1 \normalsize}
+
+\fancypagestyle{firstpage}{
+  \fancyhf{}
+  \fancyhead[L]{\largeheader{Приложение 1}} 
+  \fancyfoot[C]{\thepage} 
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+\fancypagestyle{otherpages}{
+  \fancyhf{} 
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+\begin{document}
+
+\thispagestyle{firstpage}
+
+\railalias{degree}{\^{}}
+\railalias{percent}{\%}
+\railalias{dog}{$@$}
+\railterm{degree, percent, dog}
+
+\begin{rail}
+
+line  : directiveLine | programLine ;
+directiveLine : operator ( ';' operator + ) ? VK ;
+programLine : lineNum operator ( ';' operator + ) ? VK ;
+program : programLine ( programLine + ) ? ;
+lineNum : numberGroup '.' numberLineInGroup ;
+
+identifier : letter ( (letter | digit) + | () ) ;
+
+\end{rail}
+
+\pagestyle{otherpages}
+
+\setcounter{page}{21}
+
+\newpage
+
+\begin{rail}
+
+letter : 'A' | 'B' | 'C' | '...' | 'X' | 'Y' | 'Z' ;
+digit : '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' ;
+
+identifierStandardFunction : 'FABS' | 'FCHR' | 'FCOS' | 'FITR' | 'FEXP' | 'FLOG' | 'FRAN' | 'FSBR' | 'FSGN' | 'FSQT' | 'FSIN' | 'FX' ;
+
+variable : simpleVariable | indexedVariable ;
+simpleVariable : identifier;
+
+indexedVariable : arrayIdentifier '(' indexExpression ( ',' indexExpression ) ? ')' ;
+arrayIdentifier : identifier ;
+indexExpression : unsignedInteger | variable | expression ;
+expression : primaryExpression | ( ( '+' | '-' ) ? primaryExpression) | (expression arithmeticOperation primaryExpression) ;
+primaryExpression : unsignedReal | variable | standardFunction | ( leftParenthesis expression rightParenthesis ) ;
+
+arithmeticOperation : '+' | '-' | '*' | '/' | degree ;
+
+standardFunction : identifierStandardFunction leftParenthesis (expression) ? rightParenthesis ;
+
+leftParenthesis : '(' | '[' | '<' ;
+rightParenthesis : ')' | ']' | '>' ;
+
+operator : emptyOperator | assignmentOperator | inputOutputOperator | controlOperator | debuggingOperator ;
+
+assignmentOperator : ('SET' | 'S') variable '=' expression ;
+
+inputOperator : ('ASK' | 'A') listIOElements ;
+listIOElements : IOElement ( ',' IOElement + ) ? ;
+IOElement : variable | '"' text '"' | '!' | percent | '¤' ;
+
+limiter : 'VK' | space | ',' | ';' | dog ;
+
+otputOperator : ('TYPE' | 'T') listIOElements ;
+writeOperator : ('WRITE' | 'W') ( numberLineInGroup | numberGroup | ('ALL' | 'A') ) ? ;
+jumpOperator :  ('GOTO' | 'G') ( numberLineInGroup ) ? ;
+conditionalOperator : ('IF' | 'I') '(' cond ')' lineNum (',' lineNum (',' lineNum) ? ) ? ;
+cond : expression ;
+
+repetitionOperator : ('FOR' | 'F') variable '=' start ((',' step) ? limit ) ? ';' bodyLoop ;
+start : expression ;
+step : expression ;
+limit : expression ;
+bodyLoop : (operator + ) ? ;
+
+stopOperator : ('QUIT' | 'Q') ;
+
+subroutineCallOperator : ('DO' | 'D') (numberLineInGroup | numberGroup | ('ALL' | 'A')) ? ;
+subroutineEndOperator : ('RETURN' | 'R') ;
+
+commentOperator : ('COMMENT' | 'C') anySequenceCharacters ;
+eraseOperator : ('ERASE' | 'E') (numberLineInGroup | numberGroup | ('ALL' | 'A') | ('TEXT' | 'T') ) ? ;
+modifyOperator : ('MODIFY' | 'M') numberLineInGroup ;
+xecuteOperator : ('XECUTE' | 'X') callingFunctionProcedure ;
+callingFunctionProcedure : functionName (listParametrs) ? ;
+
+\end{rail}
+    
+\end{document}
