@@ -1,0 +1,6 @@
+1.65 SET A = 5 VK
+1.75 SET B = A + 3 VK
+2.05 SET A = 0 VK
+2.10 FOR I = 1, 15; S A=A+I VK
+2.20 S A = A / 15 VK
+4.10 TYPE A VK

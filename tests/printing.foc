@@ -1,0 +1,6 @@
+1.10 SET A = 3.75; SET B = 5 VK
+1.20 TYPE %4.02,A,B,! VK
+1.30 TYPE A + B,%1,A,B! VK
+1.40 TYPE B - A,%,A,B,! VK
+1.50 TYPE A * B VK
+GOTO 1.1 VK

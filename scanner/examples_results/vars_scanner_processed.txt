@@ -1,0 +1,48 @@
+[1, 5]    	lc: lexReal		lv: 1.65		dnum = 1.650000e+00
+[1, 9]    	lc: lexId		lv: SET
+[1, 11]    	lc: lexId		lv: A
+[1, 13]    	lc: lexEQ		lv: =
+[1, 15]    	lc: lexInt		lv: 5		unum = 5
+[2, 0]    	lc: KWVK		lv: VK
+[2, 5]    	lc: lexReal		lv: 1.75		dnum = 1.750000e+00
+[2, 9]    	lc: lexId		lv: SET
+[2, 11]    	lc: lexId		lv: B
+[2, 13]    	lc: lexEQ		lv: =
+[2, 15]    	lc: lexId		lv: A
+[2, 17]    	lc: lexPlus		lv: +
+[2, 19]    	lc: lexInt		lv: 3		unum = 3
+[3, 0]    	lc: KWVK		lv: VK
+[3, 5]    	lc: lexReal		lv: 2.05		dnum = 2.050000e+00
+[3, 9]    	lc: lexId		lv: SET
+[3, 11]    	lc: lexId		lv: A
+[3, 13]    	lc: lexEQ		lv: =
+[3, 15]    	lc: lexInt		lv: 0		unum = 0
+[4, 0]    	lc: KWVK		lv: VK
+[4, 5]    	lc: lexReal		lv: 2.10		dnum = 2.100000e+00
+[4, 9]    	lc: lexId		lv: FOR
+[4, 11]    	lc: lexId		lv: I
+[4, 13]    	lc: lexEQ		lv: =
+[4, 15]    	lc: lexInt		lv: 1		unum = 1
+[4, 16]    	lc: lexComma		lv: ,
+[4, 19]    	lc: lexInt		lv: 15		unum = 15
+[4, 20]    	lc: lexSemicolon		lv: ;
+[4, 22]    	lc: lexId		lv: S
+[4, 24]    	lc: lexId		lv: A
+[4, 25]    	lc: lexEQ		lv: =
+[4, 26]    	lc: lexId		lv: A
+[4, 27]    	lc: lexPlus		lv: +
+[4, 28]    	lc: lexId		lv: I
+[5, 0]    	lc: KWVK		lv: VK
+[5, 5]    	lc: lexReal		lv: 2.20		dnum = 2.200000e+00
+[5, 7]    	lc: lexId		lv: S
+[5, 9]    	lc: lexId		lv: A
+[5, 11]    	lc: lexEQ		lv: =
+[5, 13]    	lc: lexId		lv: A
+[5, 15]    	lc: lexDiv		lv: /
+[5, 18]    	lc: lexInt		lv: 15		unum = 15
+[6, 0]    	lc: KWVK		lv: VK
+[6, 5]    	lc: lexReal		lv: 4.10		dnum = 4.100000e+00
+[6, 10]    	lc: lexId		lv: TYPE
+[6, 12]    	lc: lexId		lv: A
+[7, 0]    	lc: KWVK		lv: VK
+[7, 1]    	lc: lexEof		lv: -1
