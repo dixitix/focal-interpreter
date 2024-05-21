@@ -19,8 +19,9 @@ void Fprintlex(FILE* f)
     case lexSkip:     lcs=(char*)"lexSkip";    lvs=(char*)" "; break;
     case lexComment:    lcs=(char*)"lexComment";   lvs=lv;   break;
     case lexIgnore:      lcs=(char*)"lexIgnore";     lvs=lv;  break;
-    case lexSmcl:      lcs=(char*)"lexSemicolon";     lvs=(char*)";";  break;
+    case lexSmcl:      lcs=(char*)"lexSmcl";     lvs=(char*)";";  break;
     case lexComma:         lcs=(char*)"lexComma";        lvs=(char*)",";  break;
+    case lexPeriod:          lcs=(char*)"lexPeriod";      lvs=(char*)"."; break;
     case lexATR:      lcs=(char*)"lexATR";     lvs=lvs=(char*)'@';  break;
     case lexPlus:        lcs=(char*)"lexPlus";       lvs=(char*)"+"; break;
     case lexMinus:      lcs=(char*)"lexMinus";     lvs=(char*)"-";   break;

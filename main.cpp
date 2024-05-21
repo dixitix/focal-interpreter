@@ -2,14 +2,19 @@
 // main.cpp - функция, тестирующая работу сканера
 //------------------------------------------------------------------------------
 
+#include     "scanner/scanner_ext.h"
+#include     "parser/parser_ext.h"
+
 #include     <string.h>
 #include     <stdio.h>
-
-#include     "scanner_ext.h"
 
 void Fprintlex(FILE*);
 bool ScanInit(char*);
 void ScanDestroy(void);
+
+bool Rules(void);   
+
+extern int errors;
 
 FILE    *outfil;
 
@@ -36,6 +41,17 @@ int main(int argc, char** argv)
   Fprintlex(outfil);
   
   printf("\nЛексический анализ завершен.\n");
+
+  printf("\nНачинаю синтаксический анализ.\n");
+
+  if(Rules() && errors == 0)
+  {
+    printf("\nСинтаксис программы корректен!\n");
+  }
+  else
+  {
+    printf("\nОшибка в синтаксисе программы.\n");
+  }
 
   ScanDestroy();
   fclose(outfil);

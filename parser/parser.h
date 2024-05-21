@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-
-#include "../scanner/scanner_ext.h"
+#pragma once
 
 bool Rules(); 
 bool DirectiveLine();
@@ -36,7 +32,3 @@ bool Comment();
 bool Erase();
 bool Modify();
 bool Xecute();
-
-void Er();
-
-int errors = 0;

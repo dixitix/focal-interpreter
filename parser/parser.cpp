@@ -1,5 +1,11 @@
 #include "parser.h"
+#include "../scanner/scanner_ext.h"
+
 #include <cstring>
+#include <stdio.h>
+#include <string.h>
+
+void Er(void);
 
 bool Rules() {
     if (DirectiveLine()) {goto _end;}
@@ -142,7 +148,7 @@ bool IndExpr() {
 }
 
 bool Expr() {
-    if (AddExpr()) {return _end;}
+    if (AddExpr()) {goto _end;}
     return false;
   _end:
     return true;
@@ -509,8 +515,4 @@ bool Xecute() {
     Er(); return false;
   _end:
     return true;
-}
-
-void Er() {
-    ++errors;
 }

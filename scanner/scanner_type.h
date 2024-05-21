@@ -1,5 +1,4 @@
-#ifndef __types__
-#define __types__
+#pragma once
 
 //------------------------------------------------------------------------------
 // scanner_type.h - содержит общие для всех типы данных
@@ -45,5 +44,3 @@ typedef enum {
   kwFX,
   kwVK
 } LcType;
-
-#endif

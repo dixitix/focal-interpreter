@@ -1,5 +1,4 @@
-#ifndef __scanner_data__
-#define __scanner_data__
+#pragma once
 
 #include <stdio.h>
 
@@ -25,5 +24,3 @@ unsigned int  unum;     // двоичное представление для ц
 double  dnum;     // двоичное представление для двоичного
 
 FILE    *infil;
-
-#endif
