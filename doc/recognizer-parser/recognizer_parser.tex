@@ -1,0 +1,52 @@
+\documentclass{article}
+
+\usepackage{rail}
+
+\railoptions{-ht}
+
+\begin{document}
+
+\railalias{degree}{\^{}}
+\railalias{percent}{\%}
+\railalias{dog}{$@$}
+\railterm{degree, percent}
+
+\begin{rail}
+
+rules  : directiveLine | program ;
+directiveLine : (command + 'lexSmcl') 'kwVK' ;
+program : (programLine+) 'EOF';
+programLine : lineNum (command +'lexSmcl') ? 'kwVK' ;
+lineNum : grpNum 'lexPeriod' 'lexInt' ;
+grpNum : 'lexInt' ;
+command : set | ask | type | write | goto | if | for | quit | do | return | comment | erase | modify | xecute ;
+set : 'S' 'ET' ? var 'lexEQ' expr ;
+var : 'lexId' ('lexLftBr' indExpr ( 'lexComma' indExpr ) ? 'lexRghBr')? ;
+indExpr : 'lexInt' | var | expr ;
+expr : addExpr ;
+addExpr : mulExpr ( ( ('lexPlus' | 'lexMinus') mulExpr ) + ) ? ;
+mulExpr : powExpr ( ( ('lexMul' | 'lexDiv') powExpr ) + ) ? ;
+powExpr : unaryExpr  (('lexCaret' unaryExpr) +) ? ;
+unaryExpr : ( 'lexPlus' | 'lexMinus' ) ? primaryExpr ;
+primaryExpr : 'lexReal' | var | function | 'lexLftBr' expr 'lexRghBr' ;
+function : nameFunction 'lexLftBr' (expr + 'lexComma') ? 'lexRghBr' ;
+nameFunction : 'kwFABS' | 'kwFCHR' | 'kwFCOS' | 'kwFITR' | 'kwFLOG' | 'kwFRAN' | 'kwFSBR' | 'kwFSGN' | 'kwFSQT' | 'kwFSIN' | 'kwFX' ;
+ask : 'A' 'SK'? (IOElement + 'lexComma') ;
+IOElement : var | 'lexQuote' 'lexText' 'lexQuote' | 'lexExcl' | 'lexPercent' ;
+type : 'T' 'YPE'? (IOElement + 'lexComma') ;
+write : 'W' 'RITE'? ( lineNum | grpNum | 'A' 'LL' ? ) ? ;
+goto :  'G' 'OTO'? lineNum ? ;
+if : 'I' 'F'? 'lexLftBr' expr 'lexRghBr' \\ lineNum ('lexComma' lineNum ) ? ('lexComma' lineNum) ? ;
+for : 'F' 'OR'? var 'lexEQ' \\ expr ('lexComma' expr) ? ('lexComma' expr) ? \\ 'lexSmcl' (command + ) ? ;
+quit : 'Q' 'UIT'? ;
+do : 'D' 'O'? (lineNum | grpNum | 'A' 'LL' ?) ? ;
+return : 'R' 'ETURN'? ;
+comment : 'C' 'OMMENT'? 'lexText' ;
+erase : 'E' 'RASE'? (lineNum | grpNum | 'A' 'LL' ? | 'T' 'EXT' ? ) ? ;
+modify : 'M' 'ODIFY'? lineNum ;
+xecute : 'X' 'ECUTE'? function ;
+
+\end{rail}
+    
+\end{document}
+
