@@ -6,6 +6,7 @@
 
 #include "scanner_data.h"
 #include "scanner_local.h"
+#include "scanner_type.h"
 
 //------------------------------------------------------------------------------
 // Функции транслитератора, используемые для определения класса лексем
@@ -327,8 +328,9 @@ void Nxl(void) {
     if(IsComment())      {continue; /*return;*/} Unset();
     if(IsReal()) {return;} Unset();
     if(IsInteger()) {return;} Unset();
-    if(ch == ';') {Nxch(); lc = lexSemicolon; return;}
+    if(ch == ';') {Nxch(); lc = lexSmcl; return;}
     if(ch == ',') {Nxch(); lc = lexComma; return;}
+    if(ch == '.') {Nxch(); lc = lexPeriod; return;}
     if(ch == '@') {Nxch(); lc = lexATR; return;}
     if(ch == '+') {Nxch(); lc = lexPlus; return;}
     if(ch == '-') {Nxch(); lc = lexMinus; return;}

@@ -36,3 +36,7 @@ bool Comment();
 bool Erase();
 bool Modify();
 bool Xecute();
+
+void Er();
+
+int errors = 0;
