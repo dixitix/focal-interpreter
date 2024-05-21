@@ -2,9 +2,10 @@
 // tesout.cpp - тестовый вывод информации о лексемах
 //------------------------------------------------------------------------------
 
-#include <stdio.h>
 #include "scanner_ext.h"
 #include "scanner_type.h"
+
+#include <stdio.h>
 
 int const kBufSize = 256;
 

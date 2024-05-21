@@ -34,4 +34,4 @@ $(BUILD_PATH)parser.o : scanner/scanner_ext.h parser/parser.cpp
 
 clean :
 	rm _build/obj/*.o
-	rm _build/scanner
+	rm _build/compiler

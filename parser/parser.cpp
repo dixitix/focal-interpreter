@@ -104,13 +104,13 @@ bool Set() {
     if (lc == lexId && strcmp(lv, "ET") == 0) {Nxl(); goto _2;}
     goto _2;
   _2:
-    if (Var()) {Nxl(); goto _3;}
+    if (Var()) {goto _3;}
     Er(); return false;
   _3:
     if (lc == lexEQ) {Nxl(); goto _4;}
     Er(); return false;
   _4:
-    if (Expr()) {Nxl(); goto _end;}
+    if (Expr()) {goto _end;}
     Er(); return false;
   _end:
     return true;
@@ -341,7 +341,7 @@ bool Goto() {
     if (lc == lexId && strcmp(lv, "OTO") == 0) {Nxl(); goto _2;}
     goto _2;
   _2:
-    if (lc == LineNum()) {goto _end;}
+    if (LineNum()) {goto _end;}
     goto _end;
   _end:
     return true;
@@ -357,7 +357,7 @@ bool If() {
     if (lc == lexLftBr) {Nxl(); goto _3;}
     Er(); return false;
   _3:
-    if (Expr()) {Nxl(); goto _4;}
+    if (Expr()) {goto _4;}
     Er(); return false;
   _4:
     if (lc == lexRghBr) {Nxl(); goto _5;}
@@ -366,13 +366,13 @@ bool If() {
     if (LineNum()) {goto _6;}
     Er(); return false;
   _6:
-    if (lc == lexComma) {goto _7;}
+    if (lc == lexComma) {Nxl(); goto _7;}
     goto _8;
   _7:
     if (LineNum()) {goto _8;}
     Er(); return false;
   _8:
-    if (lc == lexComma) {goto _9;}
+    if (lc == lexComma) {Nxl(); goto _9;}
     goto _end;
   _9:
     if (LineNum()) {goto _end;}
@@ -409,10 +409,10 @@ bool For() {
     if (lc == lexSmcl) {Nxl(); goto _10;}
     Er(); return false;
   _10:
-    if (Command()) {Nxl(); goto _11;}
+    if (Command()) {goto _11;}
     goto _end;
   _11:
-    if (Command()) {Nxl(); goto _11;}
+    if (Command()) {goto _11;}
     goto _end;
   _end:
     return true;
@@ -461,7 +461,8 @@ bool Comment() {
     return false;
   _1:
     if (lc == lexId && strcmp(lv, "OMMENT") == 0) {Nxl(); goto _2;}
-    goto _2;
+    if (lc == lexText) {Nxl(); goto _end;}
+    Er(); return false;
   _2:
     if (lc == lexText) {Nxl(); goto _end;}
     Er(); return false;
@@ -496,7 +497,8 @@ bool Modify() {
     return false;
   _1:
     if (lc == lexId && strcmp(lv, "ODIFY") == 0) {Nxl(); goto _2;}
-    goto _2;
+    if (LineNum()) {goto _end;}
+    Er(); return false;
   _2:
     if (LineNum()) {goto _end;}
     Er(); return false;
