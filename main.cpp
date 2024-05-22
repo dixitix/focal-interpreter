@@ -44,6 +44,10 @@ int main(int argc, char** argv)
 
   printf("\nНачинаю синтаксический анализ.\n");
 
+  if(!ScanInit(argv[1])) { 
+    return 2;
+  }
+
   if(Rules() && errors == 0)
   {
     printf("\nСинтаксис программы корректен!\n");
