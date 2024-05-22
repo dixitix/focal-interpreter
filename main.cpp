@@ -33,15 +33,18 @@ int main(int argc, char** argv)
     return 2;
   }
   
-  while(lc != lexEof) 
+  while(lc != lexEof)
   {
     Fprintlex(outfil);
-    Nxl(); 
+    Nxl();
   }
   Fprintlex(outfil);
-  
-  printf("\nЛексический анализ завершен.\n");
 
+  if(!ScanInit(argv[1])) { 
+    return 2;
+  }
+
+  printf("\nЛексический анализ завершен.\n");
   printf("\nНачинаю синтаксический анализ.\n");
 
   if(!ScanInit(argv[1])) { 
@@ -54,10 +57,10 @@ int main(int argc, char** argv)
   }
   else
   {
-    printf("\nОшибка в синтаксисе программы.\n");
+    printf("\nОшибка в синтаксисе программы. Errors = %d\n", errors);
   }
 
   ScanDestroy();
   fclose(outfil);
   return 0;
-} 
+}

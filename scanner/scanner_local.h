@@ -27,7 +27,7 @@ struct FindString rwtab[] = {
     {(char*)"FSGN",   kwFSGN},
     {(char*)"FSQT",   kwFSQT},
     {(char*)"FSIN",   kwFSIN},
-    {(char*)"FX",   kwFX}
+    {(char*)"FX",   kwFX},
 };
 
 int rw_size = sizeof(rwtab) / sizeof(FindString);

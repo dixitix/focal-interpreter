@@ -2,4 +2,4 @@
 
 int errors = 0;
 
-void Er();
+void Er(int);
