@@ -341,7 +341,6 @@ void Nxl(void) {
     if(ch == '=') {Nxch(); lc = lexEQ; return;}
     if(ch == 'e') {Nxch(); lc = lexEE; return;}
     if(ch == '!') {Nxch(); lc = lexExcl; return;}
-    if(ch == '"') {Nxch(); lc = lexQuote; return;}
     lc = lexError; Nxch();
   } while (lc == lexComment || lc == lexSkip || lc == lexIgnore);
 }

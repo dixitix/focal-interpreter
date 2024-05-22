@@ -99,10 +99,10 @@ bool Command() {
 }
 
 bool Set() {
-    if (lc == lexId && strcmp(lv, "S") == 0) {Nxl(); goto _1;}
+    if (lc == lexId && lv[0] == 'S') {Nxl(); goto _1;}
     return false;
   _1:
-    if (lc == lexId && strcmp(lv, "ET") == 0) {Nxl(); goto _2;}
+    if (lc == lexId && strcmp(lv + 1, "ET") == 0) {Nxl(); goto _2;}
     goto _2;
   _2:
     if (Var()) {goto _3;}
@@ -220,6 +220,7 @@ bool UnaryExpr() {
 
 bool PrimaryExpr() {
     if (lc == lexReal) {Nxl(); goto _end;}
+    if (lc == lexInt) {Nxl(); goto _end;}
     if (Var()) {goto _end;}
     if (Function()) {goto _end;}
     if (lc == lexLftBr) {Nxl(); goto _1;}
@@ -273,10 +274,10 @@ bool NameFunction() {
 }
 
 bool Ask() {
-    if (lc == lexId && strcmp(lv, "A")) {Nxl(); goto _1;}
+    if (lc == lexId && lv[0] == 'A') {Nxl(); goto _1;}
     return false;
   _1:
-    if (lc == lexId && strcmp(lv, "SK")) {Nxl(); goto _2;}
+    if (lc == lexId && strcmp(lv + 1, "SK")) {Nxl(); goto _2;}
     goto _2;
   _2:
     if (IOElement()) {goto _3;}
@@ -290,25 +291,19 @@ bool Ask() {
 
 bool IOElement() {
     if (Var()) {goto _end;}
-    if (lc == lexQuote) {Nxl(); goto _1;}
     if (lc == lexExcl) {Nxl(); goto _end;}
     if (lc == lexPercent) {Nxl(); goto _end;}
+    if (lc == lexText) {Nxl(); goto _end;}
     return false;
-  _1:
-    if (lc == lexText) {Nxl(); goto _2;}
-    Er(14); return false;
-  _2:
-    if (lc == lexQuote) {Nxl(); goto _end;}
-    Er(14); return false;
   _end:
     return true;
 }
 
 bool Type() {
-    if (lc == lexId && strcmp(lv, "T") == 0) {Nxl(); goto _1;}
+    if (lc == lexId && lv[0] == 'T') {Nxl(); goto _1;}
     return false;
   _1:
-    if (lc == lexId && strcmp(lv, "YPE") == 0) {Nxl(); goto _2;}
+    if (lc == lexId && strcmp(lv + 1, "YPE") == 0) {Nxl(); goto _2;}
     goto _2;
   _2:
     if (IOElement()) {goto _3;}
@@ -321,28 +316,28 @@ bool Type() {
 }
 
 bool Write() {
-    if (lc == lexId && strcmp(lv, "W") == 0) {Nxl(); goto _1;}
+    if (lc == lexId && lv[0] == 'W') {Nxl(); goto _1;}
     return false;
   _1:
-    if (lc == lexId && strcmp(lv, "RITE") == 0) {Nxl(); goto _2;}
+    if (lc == lexId && strcmp(lv + 1, "RITE") == 0) {Nxl(); goto _2;}
     goto _2;
   _2:
     if (lc == LineNum()) {goto _end;}
     if (lc == GrpNum()) {goto _end;}
-    if (lc == lexId && strcmp(lv, "A") == 0) {Nxl(); goto _3;}
+    if (lc == lexId && lv[0] == 'A') {Nxl(); goto _3;}
     goto _end;
   _3:
-    if (lc == lexId && strcmp(lv, "LL") == 0) {Nxl(); goto _end;}
+    if (lc == lexId && strcmp(lv + 1, "LL") == 0) {Nxl(); goto _end;}
     goto _end;
   _end:
     return true;
 }
 
 bool Goto() {
-    if (lc == lexId && strcmp(lv, "G") == 0) {Nxl(); goto _1;}
+    if (lc == lexId && lv[0] == 'G') {Nxl(); goto _1;}
     return false;
   _1:
-    if (lc == lexId && strcmp(lv, "OTO") == 0) {Nxl(); goto _2;}
+    if (lc == lexId && strcmp(lv + 1, "OTO") == 0) {Nxl(); goto _2;}
     goto _2;
   _2:
     if (LineNum()) {goto _end;}
@@ -352,10 +347,10 @@ bool Goto() {
 }
 
 bool If() {
-    if (lc == lexId && strcmp(lv, "I") == 0) {Nxl(); goto _1;}
+    if (lc == lexId && lv[0] == 'I') {Nxl(); goto _1;}
     return false;
   _1:
-    if (lc == lexId && strcmp(lv, "F") == 0) {Nxl(); goto _2;}
+    if (lc == lexId && strcmp(lv + 1, "F") == 0) {Nxl(); goto _2;}
     goto _2;
   _2:
     if (lc == lexLftBr) {Nxl(); goto _3;}
@@ -386,10 +381,10 @@ bool If() {
 }
 
 bool For() {
-    if (lc == lexId && strcmp(lv, "F") == 0) {Nxl(); goto _1;}
+    if (lc == lexId && lv[0] == 'F') {Nxl(); goto _1;}
     return false;
   _1:
-    if (lc == lexId && strcmp(lv, "OR") == 0) {Nxl(); goto _2;}
+    if (lc == lexId && strcmp(lv + 1, "OR") == 0) {Nxl(); goto _2;}
     goto _2;
   _2:
     if (Var()) {goto _3;}
@@ -426,48 +421,48 @@ bool For() {
 }
 
 bool Quit() {
-    if (lc == lexId && strcmp(lv, "Q") == 0) {Nxl(); goto _1;}
+    if (lc == lexId && lv[0] == 'Q') {Nxl(); goto _1;}
     return false;
   _1:
-    if (lc == lexId && strcmp(lv, "UIT") == 0) {Nxl(); goto _end;}
+    if (lc == lexId && strcmp(lv + 1, "UIT") == 0) {Nxl(); goto _end;}
     goto _end;
   _end:
    return true;
 }
 
 bool Do() {
-    if (lc == lexId && strcmp(lv, "D") == 0) {Nxl(); goto _1;}
+    if (lc == lexId && lv[0] == 'D') {Nxl(); goto _1;}
     return false;
   _1:
-    if (lc == lexId && strcmp(lv, "O") == 0) {Nxl(); goto _2;}
+    if (lc == lexId && strcmp(lv + 1, "O") == 0) {Nxl(); goto _2;}
     goto _2;
   _2:
     if (LineNum()) {goto _end;}
     if (GrpNum()) {goto _end;}
-    if (lc == lexId && strcmp(lv, "A") == 0) {Nxl(); goto _3;}
+    if (lc == lexId && lv[0] == 'A') {Nxl(); goto _3;}
     goto _end;
   _3:
-    if (lc == lexId && strcmp(lv, "LL") == 0) {Nxl(); goto _end;}
+    if (lc == lexId && strcmp(lv + 1, "LL") == 0) {Nxl(); goto _end;}
     goto _end;
   _end:
     return true;
 }
 
 bool Return() {
-    if (lc == lexId && strcmp(lv, "R") == 0) {Nxl(); goto _1;}
+    if (lc == lexId && lv[0] == 'R') {Nxl(); goto _1;}
     return false;
   _1:
-    if (lc == lexId && strcmp(lv, "ETURN") == 0) {Nxl(); goto _end;}
+    if (lc == lexId && strcmp(lv + 1, "ETURN") == 0) {Nxl(); goto _end;}
     goto _end;
   _end:
     return true;
 }
 
 bool Comment() {
-    if (lc == lexId && strcmp(lv, "C") == 0) {Nxl(); goto _1;}
+    if (lc == lexId && lv[0] == 'C') {Nxl(); goto _1;}
     return false;
   _1:
-    if (lc == lexId && strcmp(lv, "OMMENT") == 0) {Nxl(); goto _2;}
+    if (lc == lexId && strcmp(lv + 1, "OMMENT") == 0) {Nxl(); goto _2;}
     if (lc == lexText) {Nxl(); goto _end;}
     Er(16); return false;
   _2:
@@ -478,32 +473,32 @@ bool Comment() {
 }
 
 bool Erase() {
-    if (lc == lexId && strcmp(lv, "E") == 0) {Nxl(); goto _1;}
+    if (lc == lexId && lv[0] == 'E') {Nxl(); goto _1;}
     return false;
   _1:
-    if (lc == lexId && strcmp(lv, "RASE") == 0) {Nxl(); goto _2;}
+    if (lc == lexId && strcmp(lv + 1, "RASE") == 0) {Nxl(); goto _2;}
     goto _2;
   _2:
     if (LineNum()) {goto _end;}
     if (GrpNum()) {goto _end;}
-    if (lc == lexId && strcmp(lv, "A") == 0) {Nxl(); goto _3;}
-    if (lc == lexId && strcmp(lv, "T") == 0) {Nxl(); goto _4;}
+    if (lc == lexId && lv[0] == 'A') {Nxl(); goto _3;}
+    if (lc == lexId && lv[0] == 'T') {Nxl(); goto _4;}
     goto _end;
   _3:
-    if (lc == lexId && strcmp(lv, "LL") == 0) {Nxl(); goto _end;}
+    if (lc == lexId && strcmp(lv + 1, "LL") == 0) {Nxl(); goto _end;}
     goto _end;
   _4:
-    if (lc == lexId && strcmp(lv, "EXT") == 0) {Nxl(); goto _end;}
+    if (lc == lexId && strcmp(lv + 1, "EXT") == 0) {Nxl(); goto _end;}
     goto _end;
   _end:
     return true;
 }
 
 bool Modify() {
-    if (lc == lexId && strcmp(lv, "M") == 0) {Nxl(); goto _1;}
+    if (lc == lexId && lv[0] == 'M') {Nxl(); goto _1;}
     return false;
   _1:
-    if (lc == lexId && strcmp(lv, "ODIFY") == 0) {Nxl(); goto _2;}
+    if (lc == lexId && strcmp(lv + 1, "ODIFY") == 0) {Nxl(); goto _2;}
     if (LineNum()) {goto _end;}
     Er(17); return false;
   _2:
@@ -514,10 +509,10 @@ bool Modify() {
 }
 
 bool Xecute() {
-    if (lc == lexId && strcmp(lv, "X") == 0) {Nxl(); goto _1;}
+    if (lc == lexId && lv[0] == 'X') {Nxl(); goto _1;}
     return false;
   _1:
-    if (lc == lexId && strcmp(lv, "ECUTE") == 0) {Nxl(); goto _2;}
+    if (lc == lexId && strcmp(lv + 1, "ECUTE") == 0) {Nxl(); goto _2;}
     goto _2;
   _2:
     if (Function()) {goto _end;}

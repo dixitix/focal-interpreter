@@ -22,7 +22,6 @@ typedef enum {
   lexEQ,
   lexEE,
   lexExcl,
-  lexQuote,
   lexError,
   lexInt,
   lexReal,
