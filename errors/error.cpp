@@ -5,5 +5,5 @@ extern int line, column;
 
 void Er(int i) {
     ++errors;
-    printf("[%d, %d] ERROR %d\n", line, column, i);
+    printf("[%d, %d] ERROR: %s\n", line, column, error_messages[i]);
 }

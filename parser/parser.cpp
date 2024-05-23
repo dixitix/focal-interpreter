@@ -100,13 +100,13 @@ bool Set() {
     goto _2;
   _2:
     if (Var()) {goto _3;}
-    Er(5); return false;
+    Er(4); return false;
   _3:
     if (lc == lexEQ) {Nxl(); goto _4;}
-    Er(5); return false;
+    Er(4); return false;
   _4:
     if (Expr()) {goto _end;}
-    Er(5); return false;
+    Er(4); return false;
   _end:
     return true;
 }
@@ -119,16 +119,16 @@ bool Var() {
     goto _end;
   _2:
     if (IndExpr()) {goto _3;}
-    Er(6); return false;
+    Er(5); return false;
   _3:
     if (lc == lexComma) {Nxl(); goto _4;}
     goto _5;
   _4:
     if (IndExpr()) {goto _5;}
-    Er(6); return false;
+    Er(5); return false;
   _5:
     if (lc == lexRghBr) {Nxl(); goto _end;}
-    Er(6); return false;
+    Er(5); return false;
   _end:
     return true;
 }
@@ -158,7 +158,7 @@ bool AddExpr() {
     goto _end;
   _2:
     if (MulExpr()) {goto _3;}
-    Er(7); return false;
+    Er(6); return false;
   _3:
     if (lc == lexPlus) {Nxl(); goto _2;}
     if (lc == lexMinus) {Nxl(); goto _2;}
@@ -176,7 +176,7 @@ bool MulExpr() {
     goto _end;
   _2:
     if (PowExpr()) {goto _3;}
-    Er(8); return false;
+    Er(7); return false;
   _3:
     if (lc == lexMul) {Nxl(); goto _2;}
     if (lc == lexDiv) {Nxl(); goto _2;}
@@ -193,7 +193,7 @@ bool PowExpr() {
     goto _end;
   _2:
     if (UnaryExpr()) {goto _3;}
-    Er(9); return false;
+    Er(8); return false;
   _3:
     if (lc == lexCaret) {Nxl(); goto _2;}
     goto _end;
@@ -222,10 +222,10 @@ bool PrimaryExpr() {
     return false;
   _1:
     if (Expr()) {goto _2;}
-    Er(11); return false;
+    Er(9); return false;
   _2:
     if (lc == lexRghBr) {Nxl(); goto _end;}
-    Er(11); return false;
+    Er(9); return false;
   _end:
     return true;
 }
@@ -235,18 +235,18 @@ bool Function() {
     return false;
   _1:
     if (lc == lexLftBr) {Nxl(); goto _2;}
-    Er(12); return false;
+    Er(10); return false;
   _2: 
     if (Expr()) {goto _3;}
     if (lc == lexRghBr) {Nxl(); goto _end;}
-    Er(12); return false;
+    Er(10); return false;
   _3:
     if (lc == lexRghBr) {Nxl(); goto _end;}
     if (lc == lexComma) {Nxl(); goto _4;}
-    Er(12); return false;
+    Er(10); return false;
   _4:
     if (Expr()) {goto _3;}
-    Er(12); return false;
+    Er(10); return false;
   _end:
     return true;
 }
@@ -276,7 +276,7 @@ bool Ask() {
     goto _2;
   _2:
     if (IOElement()) {goto _3;}
-    Er(13); return false;
+    Er(11); return false;
   _3:
     if (lc == lexComma) {Nxl(); goto _2;}
     goto _end;
@@ -299,10 +299,10 @@ bool IOElement() {
     goto _end;
   _3:
     if (lc == lexInt && strcmp(lv, "0") == 0) {Nxl(); goto _4;}
-    Er(20); return false;
+    Er(12); return false;
   _4:
     if (lc == lexInt) {Nxl(); goto _end;}
-    Er(20); return false;
+    Er(12); return false;
   _end:
     return true;
 }
@@ -315,7 +315,7 @@ bool Type() {
     goto _2;
   _2:
     if (IOElement()) {goto _3;}
-    Er(15); return false;
+    Er(13); return false;
   _3:
     if (lc == lexComma) {Nxl(); goto _2;}
     goto _end;
@@ -362,28 +362,28 @@ bool If() {
     goto _2;
   _2:
     if (lc == lexLftBr) {Nxl(); goto _3;}
-    Er(16); return false;
+    Er(14); return false;
   _3:
     if (Expr()) {goto _4;}
-    Er(16); return false;
+    Er(14); return false;
   _4:
     if (lc == lexRghBr) {Nxl(); goto _5;}
-    Er(16); return false;
+    Er(14); return false;
   _5:
     if (LineNum()) {goto _6;}
-    Er(16); return false;
+    Er(14); return false;
   _6:
     if (lc == lexComma) {Nxl(); goto _7;}
     goto _8;
   _7:
     if (LineNum()) {goto _8;}
-    Er(16); return false;
+    Er(14); return false;
   _8:
     if (lc == lexComma) {Nxl(); goto _9;}
     goto _end;
   _9:
     if (LineNum()) {goto _end;}
-    Er(16); return false;
+    Er(14); return false;
   _end:
     return true;
 }
@@ -396,19 +396,19 @@ bool For() {
     goto _2;
   _2:
     if (Var()) {goto _3;}
-    Er(17); return false;
+    Er(15); return false;
   _3:
     if (lc == lexEQ) {Nxl(); goto _4;}
-    Er(17); return false;
+    Er(15); return false;
   _4:
     if (Expr()) {goto _5;} 
-    Er(17); return false;
+    Er(15); return false;
   _5:
     if (lc == lexComma) {Nxl(); goto _6;}
     goto _7;
   _6:
     if (Expr()) {goto _7;}
-    Er(17); return false;
+    Er(15); return false;
   _7:
     if (lc == lexComma) {Nxl(); goto _8;}
     goto _9;
