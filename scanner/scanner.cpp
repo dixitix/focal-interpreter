@@ -212,6 +212,9 @@ static bool IsLineNum() {
   }
   return false;
   _end:
+    if (IsDigit(ch)) {
+        return false;
+    }
   if (IsAlpha(ch) || ch == '_') {
     lc = lexError; lv[++i_lv] = '\0'; return true;
   }
