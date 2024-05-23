@@ -170,75 +170,124 @@ static bool IsInteger() {
   return true; 
 }
 
+static bool IsLineNum() {
+  if (IsDigit(ch)) {
+    lv[++i_lv] = ch;
+    Nxch();
+    goto _1;
+  } else {
+    return false;
+  }
+  _1:
+  if (IsDigit(ch)) {
+    lv[++i_lv] = ch;
+    Nxch();
+    goto _2;
+  }
+  if (ch == '.') {
+    lv[++i_lv] = ch;
+    Nxch();
+    goto _3;
+  }
+  return false;
+  _2:
+  if (ch == '.') {
+    lv[++i_lv] = ch;
+    Nxch();
+    goto _3;
+  }
+  return false;
+  _3:
+  if (IsDigit(ch)) {
+    lv[++i_lv] = ch;
+    Nxch();
+    goto _4;
+  }
+  return false;
+  _4:
+  if (IsDigit(ch)) {
+    lv[++i_lv] = ch;
+    Nxch();
+    goto _end;
+  }
+  return false;
+  _end:
+  if (IsAlpha(ch) || ch == '_') {
+    lc = lexError; lv[++i_lv] = '\0'; return true;
+  }
+  lc = lexLineNum;
+  lv[++i_lv] = '\0';
+  return true;
+}
+
 // Распознавание вещественного числа.
 static bool IsReal() {
-//_0:
-    if(IsDigit(ch)) {
-        lv[++i_lv]=ch;
-        Nxch();
-        goto _1;
-    } else {
-      return false;
-    }
-_1:
-    if(IsDigit(ch)) {
-        lv[++i_lv]=ch;
-        Nxch();
-        goto _1;
-    }
-    if(ch=='.') {
-        lv[++i_lv]=ch;
-        Nxch();
-        goto _2;
-    }
+  if(IsDigit(ch)) {
+    lv[++i_lv]=ch;
+    Nxch();
+    goto _1;
+  } else {
     return false;
-_2:
-    if(IsDigit(ch)) {
-        lv[++i_lv]=ch;
-        Nxch();
-        goto _2;
-    }
-    if(ch=='E') {
-        lv[++i_lv]=ch;
-        Nxch();
-        goto _3;
-    };
-    goto _end;
-_3:
-    if((ch=='+') || (ch=='-')) {
-        lv[++i_lv]=ch;
-        Nxch();
-        goto _4;
-    };
-    if(IsDigit(ch)) {
-        lv[++i_lv]=ch;
-        Nxch();
-        goto _5;
-    }
-    return false;
-_4:
-    if(IsDigit(ch)) {
-        lv[++i_lv]=ch;
-        Nxch();
-        goto _5;
-    }
-    return false;
-_5:
-    if(IsDigit(ch)) {
-        lv[++i_lv]=ch;
-        Nxch();
-        goto _5;
-    }
-    goto _end;
-_end:
-    if(IsAlpha(ch) || ch=='_') 
-    {
-      lc=lexError; lv[++i_lv]='\0'; return true;
-    }
-    lc = lexReal; 
-    lv[++i_lv] = '\0'; 
-    dnum = atof(lv);
-    return true;
+  }
+  _1:
+  if(IsDigit(ch)) {
+    lv[++i_lv]=ch;
+    Nxch();
+    goto _1;
+  }
+  if(ch=='.') {
+    lv[++i_lv]=ch;
+    Nxch();
+    goto _2;
+  }
+  return false;
+  _2:
+  if(IsDigit(ch)) {
+    lv[++i_lv]=ch;
+    Nxch();
+    goto _2;
+  }
+  if(ch=='E') {
+    lv[++i_lv]=ch;
+    Nxch();
+    goto _3;
+  };
+  goto _end;
+  _3:
+  if((ch=='+') || (ch=='-')) {
+    lv[++i_lv]=ch;
+    Nxch();
+    goto _4;
+  };
+  if(IsDigit(ch)) {
+    lv[++i_lv]=ch;
+    Nxch();
+    goto _5;
+  }
+  return false;
+  _4:
+  if(IsDigit(ch)) {
+    lv[++i_lv]=ch;
+    Nxch();
+    goto _5;
+  }
+  return false;
+  _5:
+  if(IsDigit(ch)) {
+    lv[++i_lv]=ch;
+    Nxch();
+    goto _5;
+  }
+  goto _end;
+  _end:
+  if(IsAlpha(ch) || ch=='_')
+  {
+    lc=lexError; lv[++i_lv]='\0'; return true;
+  }
+  lc = lexReal;
+  lv[++i_lv] = '\0';
+  dnum = atof(lv);
+  return true;
 }
 
 // Распознавание строки любых символов кроме "
@@ -326,6 +375,7 @@ void Nxl(void) {
     if(IsLeftParenthesis(ch)) {Nxch(); lc = lexLftBr; return;}
     if(IsRightParenthesis(ch)) {Nxch(); lc = lexRghBr; return;}
     if(IsComment())      {continue; /*return;*/} Unset();
+    if(IsLineNum()) {return;} Unset();
     if(IsReal()) {return;} Unset();
     if(IsInteger()) {return;} Unset();
     if(ch == ';') {Nxch(); lc = lexSmcl; return;}

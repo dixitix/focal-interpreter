@@ -47,6 +47,7 @@ void Fprintlex(FILE* f)
     case lexError:      lcs=(char*)"lexError";     lvs=lv;  break;
     case lexId:      lcs=(char*)"lexId";     lvs=lv;  break;
     case lexText:      lcs=(char*)"lexText";     lvs=lv;  break;
+    case lexLineNum:   lcs=(char*)"lexLineNum";  lvs=lv;  break;
     case lexLftBr:      lcs=(char*)"lexLftBr";     lvs=(char*)"(";  break;
     case lexRghBr:      lcs=(char*)"lexRghBr";     lvs=(char*)")";  break;
 

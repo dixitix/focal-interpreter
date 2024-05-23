@@ -40,6 +40,13 @@ bool Program() {
     return true;
 }
 
+bool LineNum() {
+    if (lc == lexLineNum) { Nxl(); goto _end; }
+    return false;
+  _end:
+    return true;
+}
+
 bool ProgramLine() {
     if (LineNum()) {goto _1;}
     return false;
@@ -54,19 +61,6 @@ bool ProgramLine() {
   _3:
     if (Command()) {goto _2;}
     Er(3); return false;
-  _end:
-    return true;
-}
-
-bool LineNum() {
-    if (GrpNum()) {goto _1;}
-    return false;
-  _1:
-    if (lc == lexPeriod) {Nxl(); goto _2;}
-    Er(4); return false;
-  _2:
-    if (lc == lexInt) {Nxl(); goto _end;}
-    Er(4); return false;
   _end:
     return true;
 }

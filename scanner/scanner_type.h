@@ -29,6 +29,7 @@ typedef enum {
   lexText,
   lexLftBr,
   lexRghBr,
+  lexLineNum,
 
   kwFABS,
   kwFCHR,
