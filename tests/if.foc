@@ -1,0 +1,6 @@
+1.10 ASK "ВВЕДИТЕ ДВА ЧИСЛА",X,Y VK
+1.20 IF (X-Y)1.3,1.4,1.5 VK
+1.30 SET X=2*X; GOTO 1.6 VK
+1.40 TYPE "ЧИСЛА РАВНЫ",!; GOTO 1.6 VK
+1.50 SET Y=2*Y VK
+1.60 TYPE X,Y,! VK

@@ -1,0 +1,4 @@
+1.10 TYPE "X" VK
+1.20 DO 4.5; TYPE "Y" VK
+1.30 DO 4.5; TYPE "Z" VK
+4.50 TYPE "A" VK

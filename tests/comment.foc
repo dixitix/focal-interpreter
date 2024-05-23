@@ -1,0 +1,6 @@
+1.10 COMMENT "ПРОГРАММА ВЫЧИСЛЯЕТ СУММУ N ЧЛЕНОВ" VK
+1.12 COMMENT "РЯДА 1 + 1/2 + ... + 1/N" VK
+1.20 ASK "N",N; COMMENT "ВВОД ЧИСЛА N" VK
+1.30 SET S=0; FOR J=1,N; SET S=S+1/J VK
+1.40 TYPE %,"S=",S,!; COMMENT "S ВЫВОДИТСЯ В ФОРМЕ" VK
+1.50 COMMENT "С ПЛАВАЮЩЕЙ ЗАПЯТОЙ" VK

@@ -210,7 +210,7 @@ static bool IsLineNum() {
     Nxch();
     goto _end;
   }
-  return false;
+  goto _end;
   _end:
     if (IsDigit(ch)) {
         return false;
