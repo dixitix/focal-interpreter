@@ -207,13 +207,14 @@ bool UnaryExpr() {
     goto _1;
   _1:
     if (PrimaryExpr()) {goto _end;}
-    Er(10); return false;
+    return false;
   _end:
     return true;
 }
 
 bool PrimaryExpr() {
     if (lc == lexReal) {Nxl(); goto _end;}
+    if (LineNum()) {goto _end;}
     if (lc == lexInt) {Nxl(); goto _end;}
     if (Var()) {goto _end;}
     if (Function()) {goto _end;}
@@ -284,11 +285,24 @@ bool Ask() {
 }
 
 bool IOElement() {
-    if (Var()) {goto _end;}
+    if (Expr()) {goto _end;}
     if (lc == lexExcl) {Nxl(); goto _end;}
-    if (lc == lexPercent) {Nxl(); goto _end;}
+    if (lc == lexPercent) {Nxl(); goto _1;}
     if (lc == lexText) {Nxl(); goto _end;}
     return false;
+  _1:
+    if (LineNum()) {goto _end;}
+    if (lc == lexInt) {Nxl(); goto _2;}
+    goto _end;
+  _2:
+    if (lc == lexPeriod) {Nxl(); goto _3;}
+    goto _end;
+  _3:
+    if (lc == lexInt && strcmp(lv, "0") == 0) {Nxl(); goto _4;}
+    Er(20); return false;
+  _4:
+    if (lc == lexInt) {Nxl(); goto _end;}
+    Er(20); return false;
   _end:
     return true;
 }
