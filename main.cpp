@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 {
   if(argc != 3) {
     printf("\nНеправильный формат команды!\n");
-    printf("\nПравильный формат: scanner sourced_file recived_file.\n");
+    printf("\nПравильный формат: compiler input_file output_file.\n");
     return 1;
   }
 
