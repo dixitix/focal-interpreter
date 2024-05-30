@@ -4,6 +4,7 @@
 
 #include     "scanner/scanner_ext.h"
 #include     "parser/parser_ext.h"
+#include     "name_table/name_table_ext.h"
 
 #include     <string.h>
 #include     <stdio.h>
@@ -60,7 +61,13 @@ int main(int argc, char** argv)
     printf("\nОшибка в синтаксисе программы. Errors = %d\n", errors);
   }
 
+  FILE* table_file = fopen(strcat(argv[2], "_table_name"), "w");
+
+  Out(table, table_file);
+
   ScanDestroy();
   fclose(outfil);
+
+  Clear(table);
   return 0;
 }

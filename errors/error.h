@@ -24,4 +24,5 @@ static char *error_messages[] = {
   (char*)"Error in \"Comment\" rool",
   (char*)"Error in \"Modify\" rool",
   (char*)"Error in \"Xecute\" rool",
+  (char*)"Error in \"Var\" rool. It is not variable!",
 };

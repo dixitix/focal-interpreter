@@ -1,0 +1,5 @@
+Table of names
+A: variable. It has usual type. Address = 0. 
+B: variable. It has usual type. Address = 8. 
+I: variable. It has usual type. Address = 16. 
+Size of Table = 3

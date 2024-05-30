@@ -9,6 +9,8 @@ OBJ_TRANS  = $(BUILD_PATH)error.o \
 	$(BUILD_PATH)main.o \
 	$(BUILD_PATH)scanner.o \
 	$(BUILD_PATH)testout.o \
+	$(BUILD_PATH)name_table.o \
+	$(BUILD_PATH)app_types.o \
 	$(BUILD_PATH)parser.o
 
 all : $(BUILD_PATHEXE)compiler
@@ -31,6 +33,11 @@ $(BUILD_PATH)testout.o : scanner/scanner_ext.h scanner/testout.cpp
 $(BUILD_PATH)parser.o : scanner/scanner_ext.h parser/parser.cpp
 	$(CC) $(CFLAGS) -c parser/parser.cpp -o $(BUILD_PATH)parser.o
 
+$(BUILD_PATH)name_table.o : name_table/name_table.h name_table/name_table.cpp
+	$(CC) $(CFLAGS) -c name_table/name_table.cpp -o $(BUILD_PATH)name_table.o
+
+$(BUILD_PATH)app_types.o : name_table/app_types.h name_table/app_types.cpp
+	$(CC) $(CFLAGS) -c name_table/app_types.cpp -o $(BUILD_PATH)app_types.o
 
 clean :
 	rm _build/obj/*.o

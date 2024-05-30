@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../name_table/name_table_ext.h"
+
 void Er(int i);
 
 bool Rules() {
@@ -112,10 +114,34 @@ bool Set() {
 }
 
 bool Var() {
-    if (lc == lexId) {Nxl(); goto _1;}
+    AppVariable* tmp_app_var = nullptr;
+  	varType tmp_type = USUAL_TYPE;
+
+    if (lc == lexId) {
+      NameTable::iterator i = table.find(lv);
+      if(i != table.end())
+      {
+        if(AppVariable* p_var = dynamic_cast<AppVariable*>((*i).second))
+        {
+          // add later to itermediate representation
+          ;;;
+        }
+        else
+        {
+          Er(19); return false;
+        }
+      } else {
+        tmp_app_var = new AppVariable;
+        tmp_app_var->_type = USUAL_TYPE;
+        tmp_type = USUAL_TYPE;
+        table[lv] = tmp_app_var;
+      }
+      Nxl();
+      goto _1;
+    }
     return false;
   _1:
-    if (lc == lexLftBr) {Nxl(); goto _2;}
+    if (lc == lexLftBr) {tmp_type = INDEXED_TYPE; Nxl(); goto _2;}
     goto _end;
   _2:
     if (IndExpr()) {goto _3;}
@@ -130,6 +156,11 @@ bool Var() {
     if (lc == lexRghBr) {Nxl(); goto _end;}
     Er(5); return false;
   _end:
+    if (tmp_app_var != nullptr) {
+        tmp_app_var->_type = tmp_type;
+        tmp_app_var->_addr = glob_addr;
+        glob_addr += 8;
+    }
     return true;
 }
 

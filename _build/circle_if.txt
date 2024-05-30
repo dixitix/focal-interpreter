@@ -1,0 +1,37 @@
+[1, 5]    	lc: lexLineNum		lv: 1.10
+[1, 9]    	lc: lexId		lv: SET
+[1, 11]    	lc: lexId		lv: X
+[1, 12]    	lc: lexEQ		lv: =
+[1, 13]    	lc: lexInt		lv: 0		unum = 0
+[2, 0]    	lc: KWVK		lv: VK
+[2, 5]    	lc: lexLineNum		lv: 1.20
+[2, 10]    	lc: lexId		lv: TYPE
+[2, 12]    	lc: lexId		lv: X
+[2, 13]    	lc: lexComma		lv: ,
+[2, 17]    	lc: KWFSIN		lv: FSIN
+[2, 18]    	lc: lexLftBr		lv: (
+[2, 19]    	lc: lexId		lv: X
+[2, 20]    	lc: lexRghBr		lv: )
+[2, 21]    	lc: lexComma		lv: ,
+[2, 22]    	lc: lexExcl		lv: !
+[3, 0]    	lc: KWVK		lv: VK
+[3, 5]    	lc: lexLineNum		lv: 1.30
+[3, 9]    	lc: lexId		lv: SET
+[3, 11]    	lc: lexId		lv: X
+[3, 12]    	lc: lexEQ		lv: =
+[3, 13]    	lc: lexId		lv: X
+[3, 14]    	lc: lexPlus		lv: +
+[3, 19]    	lc: lexReal		lv: 0.001		dnum = 1.000000e-03
+[4, 0]    	lc: KWVK		lv: VK
+[4, 5]    	lc: lexLineNum		lv: 1.40
+[4, 8]    	lc: lexId		lv: IF
+[4, 10]    	lc: lexLftBr		lv: (
+[4, 11]    	lc: lexId		lv: X
+[4, 12]    	lc: lexMinus		lv: -
+[4, 17]    	lc: lexReal		lv: 0.999		dnum = 9.990000e-01
+[4, 18]    	lc: lexRghBr		lv: )
+[4, 21]    	lc: lexLineNum		lv: 1.2
+[4, 22]    	lc: lexComma		lv: ,
+[4, 25]    	lc: lexLineNum		lv: 1.2
+[4, 28]    	lc: KWVK		lv: VK
+[4, 28]    	lc: lexEof		lv: -1
