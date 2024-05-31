@@ -8,7 +8,7 @@ make
 
 The built files can be found in the _build directory, with object files located in the _build/obj directory.
 
-## Running the Built Program
+## Running
 
 To run the compiled program, use the following command:
 
